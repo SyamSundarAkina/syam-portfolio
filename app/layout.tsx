@@ -9,14 +9,18 @@ const sans = Geist({ subsets: ["latin"], variable: "--font-sans", display: "swap
 const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono", display: "swap" });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://syam-sundar-akina.vercel.app"),
   title: "Syam Sundar Akina | AI Engineer & Data Scientist",
   description:
     "AI Engineer and Data Scientist in Dallas, TX. Production LLM applications, multi-agent systems, RAG, and machine learning.",
   openGraph: {
     title: "Syam Sundar Akina | AI Engineer & Data Scientist",
     description: "Production LLM applications, multi-agent systems, RAG, and machine learning.",
-    images: ["/og.jpg"],
+    url: "/",
+    type: "website",
+    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "Syam Sundar Akina, AI Engineer & Data Scientist" }],
   },
+  twitter: { card: "summary_large_image" },
 };
 
 export const viewport: Viewport = { themeColor: "#050505" };
