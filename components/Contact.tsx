@@ -21,7 +21,7 @@ export default function Contact() {
   };
 
   const links = [
-    { label: "LinkedIn", sub: "syam-sundar-akina", href: profile.linkedin, icon: LinkedinIcon },
+    { label: "LinkedIn", sub: "a-syam", href: profile.linkedin, icon: LinkedinIcon },
     { label: "GitHub", sub: "SyamSundarAkina", href: profile.github, icon: GithubIcon },
   ];
 

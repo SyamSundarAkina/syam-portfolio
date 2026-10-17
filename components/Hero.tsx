@@ -10,11 +10,12 @@ const ticker = [
 
 // Agent "nodes" around the portrait. `pos` places the tag; `from`/`to` are connector
 // endpoints in % of the portrait box (from the figure to the tag's near edge).
+// `short`/`mobile` are the compact pill shown on phones, placed over the shoulders and jacket.
 const chips = [
-  { tag: "agent.orchestrate", title: "Multi-agent systems", sub: "Foundry · LangGraph · AutoGen", pos: "right-[86%] top-[28%]", from: [38, 30], to: [14, 34], drift: "chip-drift-a" },
-  { tag: "cert.azure", title: "Azure AI Engineer", sub: "Microsoft Certified", pos: "left-[82%] top-[12%]", from: [61, 20], to: [83, 17], drift: "chip-drift-b" },
-  { tag: "rag.retrieve", title: "RAG & vector search", sub: "Embeddings · FAISS · rerank", pos: "right-[90%] top-[62%]", from: [27, 63], to: [10, 67], drift: "chip-drift-b" },
-  { tag: "guard.verify", title: "Guardrails & evals", sub: "Injection defense · HITL", pos: "left-[88%] top-[54%]", from: [71, 52], to: [89, 58], drift: "chip-drift-a" },
+  { tag: "agent.orchestrate", title: "Multi-agent systems", sub: "Foundry · LangGraph · AutoGen", pos: "right-[86%] top-[28%]", from: [38, 30], to: [14, 34], drift: "chip-drift-a", short: "Multi-agent", mobile: "left-[-3%] top-[38%]" },
+  { tag: "cert.azure", title: "Azure AI Engineer", sub: "Microsoft Certified", pos: "left-[82%] top-[12%]", from: [61, 20], to: [83, 17], drift: "chip-drift-b", short: "Azure AI Eng.", mobile: "right-[-3%] top-[30%]" },
+  { tag: "rag.retrieve", title: "RAG & vector search", sub: "Embeddings · FAISS · rerank", pos: "right-[90%] top-[62%]", from: [27, 63], to: [10, 67], drift: "chip-drift-b", short: "RAG · FAISS", mobile: "left-[-5%] top-[60%]" },
+  { tag: "guard.verify", title: "Guardrails & evals", sub: "Injection defense · HITL", pos: "left-[88%] top-[54%]", from: [71, 52], to: [89, 58], drift: "chip-drift-a", short: "Guardrails", mobile: "right-[-5%] top-[52%]" },
 ];
 
 export default function Hero() {
@@ -83,6 +84,19 @@ export default function Hero() {
                   <span className="mt-1 block whitespace-nowrap text-[13px] font-medium text-fg">{title}</span>
                   <span className="block whitespace-nowrap font-mono text-[10.5px] text-subtle">{sub}</span>
                 </div>
+              </div>
+            ))}
+
+            {/* phones: compact agent pills at the portrait's edges */}
+            {chips.map(({ tag, short, mobile, drift }, i) => (
+              <div key={`${tag}-m`} className={`absolute md:hidden ${mobile}`} aria-hidden="true">
+                <span
+                  className={`${drift} inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border border-line bg-bg/75 px-2.5 py-1 font-mono text-[10px] text-fg shadow-[0_8px_24px_-10px_rgb(0_0_0/0.9)] backdrop-blur-md`}
+                  style={{ animationDelay: `${i * -2.3}s` }}
+                >
+                  <span className="status-dot" />
+                  {short}
+                </span>
               </div>
             ))}
           </div>

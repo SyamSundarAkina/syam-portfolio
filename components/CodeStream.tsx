@@ -45,8 +45,8 @@ const RIGHT = [
 function Column({ lines, className }: { lines: string[]; className: string }) {
   const block = [...lines, "", ...lines];
   return (
-    <div className={`code-col pointer-events-none absolute top-0 hidden h-full overflow-hidden lg:block ${className}`} aria-hidden="true">
-      <pre className="code-scroll font-mono text-[11px] leading-[1.9] text-white/[0.07]">
+    <div className={`code-col pointer-events-none absolute top-0 h-full overflow-hidden ${className}`} aria-hidden="true">
+      <pre className="code-scroll font-mono text-[10px] leading-[1.9] text-white/[0.05] lg:text-[11px] lg:text-white/[0.07]">
         {block.map((l, i) => (
           <span key={i} className={`block ${l.startsWith("@") || l.startsWith("def") || l.startsWith("from") ? "text-accent/20" : ""}`}>
             {l || " "}
@@ -60,8 +60,9 @@ function Column({ lines, className }: { lines: string[]; className: string }) {
 export default function CodeStream() {
   return (
     <>
-      <Column lines={LEFT} className="left-[2%] w-[26rem]" />
-      <Column lines={RIGHT} className="right-[2%] w-[24rem] [&_.code-scroll]:[animation-direction:reverse]" />
+      {/* phones: one faint full-width column; desktop: a column on each side */}
+      <Column lines={LEFT} className="left-0 w-full px-4 lg:left-[2%] lg:w-[26rem] lg:px-0" />
+      <Column lines={RIGHT} className="right-[2%] hidden w-[24rem] lg:block [&_.code-scroll]:[animation-direction:reverse]" />
     </>
   );
 }

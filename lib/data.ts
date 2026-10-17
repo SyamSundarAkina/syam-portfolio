@@ -6,7 +6,7 @@ export const profile = {
   focus: "Agentic AI · LLM applications · Machine learning",
   email: "syamsundarakina@gmail.com",
   location: "Dallas, TX",
-  linkedin: "https://www.linkedin.com/in/syam-sundar-akina/",
+  linkedin: "https://www.linkedin.com/in/a-syam/",
   github: "https://github.com/SyamSundarAkina",
   intro:
     "I build LLM applications, multi-agent systems, and RAG pipelines on Azure, along with the testing and guardrails they need to run reliably in production.",
