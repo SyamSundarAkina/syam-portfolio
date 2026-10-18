@@ -8,8 +8,8 @@ export default function Projects() {
   return (
     <section id="projects" className="section">
       <div className="section-line" aria-hidden="true" />
-      <SectionHeader label="Projects" title="Built on my own time.">
-        Retrieval systems, multi-agent workflows, and fine-tuned models, all on GitHub.
+      <SectionHeader label="Projects" title="Selected projects.">
+        Independent builds in retrieval, multi-agent systems, and LLM fine-tuning, with source code on GitHub.
       </SectionHeader>
 
       <div className="grid gap-5 md:grid-cols-2">
@@ -17,14 +17,15 @@ export default function Projects() {
           <Reveal key={p.name} delay={(i % 2) * 90} className="h-full">
             <article className="card spot hud group flex h-full flex-col overflow-hidden transition-colors duration-300 hover:border-fg/20">
               {/* pipeline visual */}
-              <div className="relative flex min-h-[5.5rem] items-center border-b border-line bg-white/[0.015] px-5 py-4">
+              <div className="relative flex min-h-[5.5rem] items-center border-b md:min-h-[7.75rem] lg:min-h-[5.5rem] border-line bg-white/[0.015] px-5 py-4">
                 <div className="bg-grid pointer-events-none absolute inset-0 opacity-60" aria-hidden="true" />
                 <ol className="relative flex w-full flex-wrap items-center gap-x-2 gap-y-2" aria-label="How it works">
                   {p.flow.map((step, j) => (
-                    <li key={step} className={`flex min-w-0 items-center gap-2 ${j > 0 ? "flex-1" : ""}`}>
+                    // a step never shrinks below its label's longest word; labels wrap, and the row wraps when space runs out
+                    <li key={step} className={`flex items-center gap-2 ${j > 0 ? "flex-1" : ""}`}>
                       {j > 0 && <span className="pipe min-w-3 flex-1" aria-hidden="true" />}
                       <span
-                        className={`max-w-[7rem] shrink-0 rounded-md border px-2 py-1 text-center font-mono text-[10.5px] leading-snug [text-wrap:balance] sm:text-[11px] ${
+                        className={`max-w-[7rem] rounded-md border px-2 py-1 text-center font-mono text-[10.5px] leading-snug [text-wrap:balance] sm:text-[11px] ${
                           j === p.flow.length - 1 ? "border-accent/40 bg-accent/10 text-accent" : "border-line bg-bg text-muted"
                         }`}
                       >

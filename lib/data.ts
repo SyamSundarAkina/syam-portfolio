@@ -209,26 +209,27 @@ export const projects: Project[] = [
 
 export type SkillGroup = { id: "agents" | "rag" | "security" | "evals" | "ml" | "cloud"; title: string; skills: string[] };
 
+// Named the way 2026 AI-engineering roles describe them; every item is backed by the resumes or GitHub projects.
 export const skillGroups: SkillGroup[] = [
   {
     id: "agents",
-    title: "AI Engineering & Agents",
-    skills: ["LLMs", "Microsoft Foundry Agent Service", "Gemini Agent SDK", "LangGraph", "AutoGen", "CrewAI", "Prompt engineering", "Tool / function calling", "Structured outputs", "Multi-agent orchestration"],
+    title: "Agentic AI & Orchestration",
+    skills: ["Agentic AI", "Multi-agent orchestration", "Microsoft Foundry Agent Service", "LangGraph", "AutoGen", "CrewAI", "Gemini Agent SDK", "Tool / function calling", "Structured outputs", "Context engineering", "Human-in-the-loop workflows"],
   },
   {
     id: "rag",
     title: "LLMs, RAG & Fine-Tuning",
-    skills: ["RAG", "Embeddings", "FAISS", "Vector search", "Semantic search", "Chunking", "Hugging Face", "PEFT / LoRA", "Document ingestion & OCR"],
+    skills: ["LLM applications", "Production RAG", "Hybrid search (BM25 + vector)", "Embeddings", "FAISS", "Reranking", "Chunking & document ingestion", "Hugging Face", "PEFT / LoRA fine-tuning", "OCR"],
   },
   {
     id: "security",
-    title: "AI Security & Governance",
-    skills: ["Prompt-injection defenses", "Guardrails", "Schema validation", "Output verification", "Human-in-the-loop", "Azure Key Vault", "Managed Identity", "JWT / OAuth 2.0", "Azure API Management"],
+    title: "AI Security & Guardrails",
+    skills: ["Guardrails", "Prompt-injection defenses", "Output verification", "Schema enforcement", "Human review gates", "Azure Key Vault", "Managed Identity", "JWT / OAuth 2.0", "Azure API Management"],
   },
   {
     id: "evals",
-    title: "AI Evaluation & LLMOps",
-    skills: ["LLM evaluation", "Ground-truth datasets", "Regression testing", "Benchmarking", "Grounding checks", "Confusion-matrix analysis", "Prompt & model versioning", "Monitoring"],
+    title: "Evals, LLMOps & Observability",
+    skills: ["LLM evaluation", "Retrieval evaluation (hit@K, MRR)", "Ground-truth datasets", "Regression testing", "Grounding checks", "Benchmarking", "Prompt & model versioning", "Observability (Application Insights)", "CI/CD for AI"],
   },
   {
     id: "ml",
@@ -238,6 +239,6 @@ export const skillGroups: SkillGroup[] = [
   {
     id: "cloud",
     title: "Cloud, APIs & Data",
-    skills: ["Azure Functions", "Durable Functions", "Application Insights", "FastAPI", "REST APIs", "Webhooks", "Docker", "GitHub Actions", "CI/CD", "SQL", "Pandas", "ETL"],
+    skills: ["Azure Functions", "Durable Functions", "Event-driven workflows", "FastAPI", "Async Python (asyncio)", "REST APIs", "Webhooks", "Docker", "GitHub Actions", "SQL", "Pandas", "ETL"],
   },
 ];
