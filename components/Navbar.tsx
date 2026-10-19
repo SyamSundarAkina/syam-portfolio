@@ -47,7 +47,7 @@ export default function Navbar() {
           <span className="grid h-8 w-8 place-items-center rounded-full border border-fg/30 text-[11px]">SA</span>
         </a>
 
-        <ul className="hidden items-center gap-1.5 md:flex">
+        <ul className="hidden items-center gap-1.5 lg:flex">
           {navLinks.map(({ id, label }) => (
             <li key={id}>
               <a
@@ -66,12 +66,12 @@ export default function Navbar() {
         </ul>
 
         <div className="flex items-center">
-          <a href="#contact" className="btn-primary hidden h-10 md:inline-flex">
+          <a href="#contact" className="btn-primary hidden h-10 lg:inline-flex">
             Get in touch
           </a>
           <button
             type="button"
-            className="grid h-10 w-10 place-items-center rounded-full text-fg md:hidden"
+            className="grid h-10 w-10 place-items-center rounded-full text-fg lg:hidden"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
             onClick={() => setOpen((o) => !o)}
@@ -82,7 +82,7 @@ export default function Navbar() {
       </nav>
 
       {open && (
-        <ul className="mx-auto mt-2 flex max-w-6xl flex-col rounded-3xl border border-line bg-bg/90 p-2 backdrop-blur-md md:hidden">
+        <ul className="mx-auto mt-2 flex max-w-6xl flex-col rounded-3xl border border-line bg-bg/90 p-2 backdrop-blur-md lg:hidden">
           {navLinks.map(({ id, label }) => (
             <li key={id}>
               <a href={`#${id}`} onClick={() => setOpen(false)} className="block rounded-full px-4 py-3 text-sm text-fg hover:bg-white/5">

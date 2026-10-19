@@ -16,6 +16,7 @@ export const navLinks = [
   { id: "about", label: "About" },
   { id: "experience", label: "Experience" },
   { id: "projects", label: "Projects" },
+  { id: "open-source", label: "Open Source" },
   { id: "skills", label: "Skills" },
   { id: "contact", label: "Contact" },
 ];
@@ -28,7 +29,7 @@ export const about = {
   title: "I build AI agents, LLM apps, and ML systems for production.",
   paragraphs: [
     "I’m an AI Engineer and Data Scientist in Dallas with 4+ years of experience across machine learning, generative AI, and software engineering. I currently work at Publicis Groupe on the AI engineering side, building enterprise AI agents on Microsoft Azure and an AI-powered campaign recommendation tool.",
-    "Most of my work is in Python and SQL. I build LLM applications and multi-agent workflows with Microsoft Foundry, LangGraph, AutoGen, and CrewAI, and RAG pipelines with hybrid search, FAISS, and cross-encoder reranking. I fine-tune models with Hugging Face and PEFT/LoRA, and train classical models with scikit-learn, PyTorch, and XGBoost.",
+    "Most of my work is in Python and SQL. I build LLM applications and multi-agent workflows with Microsoft Foundry, LangGraph, AutoGen, and CrewAI, and RAG pipelines with hybrid search, FAISS, and cross-encoder reranking. I fine-tune models with Hugging Face and PEFT/LoRA, train classical models with scikit-learn, PyTorch, and XGBoost, and contribute to open source, including Meta’s TorchRec.",
     "I care about AI that holds up after the demo: tested against real data, protected with guardrails and human review, and deployed with Docker, CI/CD, and monitoring on Azure.",
   ],
   current: {
@@ -85,7 +86,7 @@ export const experience: Role[] = [
       "Designed a YAML-based rules layer so the team can change how threads, senders, urgency, and attachments are handled without code changes.",
       "Built ground-truth datasets and regression tests that catch mistakes before they ship, reaching 92.6% classification accuracy, 99.6% path accuracy, and 100% manual-review compliance.",
       "Secured the agents with prompt-injection defenses, schema checks, JWT, Azure API Management, Key Vault, and Managed Identity, and shipped them with Docker and GitHub Actions CI/CD, tested end to end across six platform integrations.",
-      "Partnered with business users to find what wasn’t working, showed them how the agents make decisions, and turned their feedback into fixes.",
+      "Owned both systems end to end, from gathering requirements with clients and business users through design, evaluation, and deployment, explaining how the agents make decisions and turning feedback into fixes.",
     ],
     stack: ["Microsoft Foundry", "Azure Functions", "LLMs", "Python", "Key Vault", "GitHub Actions"],
   },
@@ -203,6 +204,42 @@ export const projects: Project[] = [
     stack: ["PEFT / LoRA", "Hugging Face", "GPT-2", "PyTorch"],
     flow: ["Raw text", "JSONL", "LoRA train", "Evaluate"],
     repo: "https://github.com/SyamSundarAkina/Fine_Tuning_our_own_dataset",
+  },
+];
+
+/* ---------- Open source ---------- */
+
+export type Contribution = {
+  project: string;
+  repo: string; // "owner/name" on GitHub
+  context: string;
+  title: string; // the PR title
+  summary: string;
+  changes: string[];
+  status: "In review" | "Merged";
+  pr: { number: number; url: string };
+  issue?: { number: number; url: string };
+  diff: string;
+  stack: string[];
+};
+
+export const openSource: Contribution[] = [
+  {
+    project: "PyTorch TorchRec",
+    repo: "meta-pytorch/torchrec",
+    context: "Meta’s library for large-scale recommendation systems",
+    title: "Only warn about ignored cache_params when they are set",
+    summary:
+      "TorchRec logged “caching params will be ignored” for every data-parallel or dense-kernel table during embedding sharding, even when no cache settings were given, which was noisy and confusing for users.",
+    changes: [
+      "The warning now appears only when cache_params are actually set, and explains why they have no effect on fully replicated tables.",
+      "Added regression tests for both cases, with existing behavior otherwise unchanged.",
+    ],
+    status: "In review",
+    pr: { number: 4904, url: "https://github.com/meta-pytorch/torchrec/pull/4904" },
+    issue: { number: 3505, url: "https://github.com/meta-pytorch/torchrec/issues/3505" },
+    diff: "+63 −11 · 2 files",
+    stack: ["Python", "PyTorch", "Distributed embeddings", "unittest"],
   },
 ];
 
