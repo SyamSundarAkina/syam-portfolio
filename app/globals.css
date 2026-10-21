@@ -10,7 +10,7 @@
   --line: 36 36 36;
   --fg: 242 242 242;
   --muted: 163 163 163;
-  --subtle: 108 108 108;
+  --subtle: 138 138 138; /* ≥5.5:1 on bg and surface (WCAG AA for small text) */
   --accent: 125 211 252;
 }
 
@@ -40,7 +40,7 @@ body {
   }
 
   .section {
-    @apply shell pb-6 pt-14 sm:pb-8 sm:pt-20;
+    @apply shell pb-6 pt-8 sm:pb-8 sm:pt-10;
   }
 
   .eyebrow {
@@ -52,7 +52,7 @@ body {
   }
 
   .tag {
-    @apply inline-flex items-center rounded-full border border-line bg-white/[0.02] px-2.5 py-0.5 font-mono text-[11px] text-muted;
+    @apply inline-flex items-center rounded-full border border-line bg-white/[0.02] px-2.5 py-0.5 font-mono text-xs text-muted;
   }
 
   .btn {
@@ -166,6 +166,66 @@ body {
 @keyframes orb-b {
   0%, 100% { transform: translate3d(0, 0, 0); }
   50% { transform: translate3d(-14vw, -12vh, 0); }
+}
+
+/* ---------- Section rhythm: alternating bands, heading beams, index numerals ---------- */
+
+/* Full-bleed lighter band behind every other section, framed by glowing hairlines */
+.band {
+  position: relative;
+  isolation: isolate;
+  padding-bottom: 4rem;
+}
+@media (min-width: 640px) {
+  .band {
+    padding-bottom: 5.5rem;
+  }
+}
+.band::before {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 60% 220px at 50% 0%, rgb(var(--accent) / 0.07), transparent 70%),
+    radial-gradient(rgb(255 255 255 / 0.05) 1px, transparent 1px) 0 0 / 22px 22px,
+    linear-gradient(to bottom, rgb(255 255 255 / 0.03), rgb(255 255 255 / 0.012));
+  border-block: 1px solid rgb(255 255 255 / 0.07);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.band::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: min(72rem, 100vw);
+  height: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, transparent, rgb(var(--accent) / 0.55), transparent);
+}
+
+/* Soft light cone over each section heading, echoing the hero beam */
+.head-beam {
+  background: conic-gradient(from 180deg at 50% 0%, transparent 150deg, rgb(255 255 255 / 0.06) 172deg, rgb(var(--accent) / 0.1) 180deg, rgb(255 255 255 / 0.06) 188deg, transparent 210deg);
+  mask-image: linear-gradient(to bottom, #000 20%, transparent 90%);
+  filter: blur(18px);
+}
+
+/* Big outlined section number behind the heading */
+.section-index {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.06em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgb(255 255 255 / 0.16);
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.07), transparent 75%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  mask-image: linear-gradient(to bottom, #000 25%, transparent 80%);
 }
 
 /* Gradient headings (same treatment as the hero name) */

@@ -38,6 +38,8 @@ export default function Contact() {
       <Reveal className="shell relative pb-20 text-center sm:pb-28">
         <p className="inline-flex items-center gap-2 rounded-full border border-line bg-white/[0.03] px-3.5 py-1 font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
           <span className="h-1.5 w-1.5 rounded-full bg-accent shadow-[0_0_10px_rgb(var(--accent))]" aria-hidden="true" />
+          <span className="text-subtle">06</span>
+          <span className="text-fg/20" aria-hidden="true">/</span>
           Contact
         </p>
         <h2 className="text-gradient mx-auto mt-6 max-w-4xl text-[clamp(2.5rem,7vw,5.5rem)] font-semibold leading-[0.95] tracking-[-0.045em]">
@@ -49,11 +51,11 @@ export default function Contact() {
 
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <a href={`mailto:${profile.email}`} className="btn-primary h-12 px-6">
-            <Mail className="h-4 w-4" aria-hidden="true" /> {profile.email}
+            <Mail className="h-4 w-4" aria-hidden="true" /> Email me
           </a>
-          <button type="button" onClick={copyEmail} className="btn-ghost h-12 bg-bg/60 backdrop-blur" aria-live="polite">
+          <button type="button" onClick={copyEmail} className="btn-ghost h-12 bg-bg/60 backdrop-blur" aria-live="polite" aria-label={copied ? "Email copied" : `Copy ${profile.email}`}>
             {copied ? <Check className="h-4 w-4 text-accent" aria-hidden="true" /> : <Copy className="h-4 w-4" aria-hidden="true" />}
-            {copied ? "Copied" : "Copy email"}
+            <span className="font-mono text-[13px]">{copied ? "Copied to clipboard" : profile.email}</span>
           </button>
         </div>
 

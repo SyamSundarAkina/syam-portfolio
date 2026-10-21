@@ -7,8 +7,7 @@ import SectionHeader from "./SectionHeader";
 export default function Projects() {
   return (
     <section id="projects" className="section">
-      <div className="section-line" aria-hidden="true" />
-      <SectionHeader label="Projects" title="Selected projects.">
+      <SectionHeader index="03" label="Projects" title="Selected projects.">
         Independent builds in retrieval, multi-agent systems, and LLM fine-tuning, with source code on GitHub.
       </SectionHeader>
 

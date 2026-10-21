@@ -15,8 +15,7 @@ const icons: Record<SkillGroup["id"], typeof Bot> = {
 export default function Skills() {
   return (
     <section id="skills" className="section">
-      <div className="section-line" aria-hidden="true" />
-      <SectionHeader label="Skills" title="The toolkit." />
+      <SectionHeader index="05" label="Skills" title="The toolkit." />
 
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {skillGroups.map((g, i) => {
@@ -31,8 +30,8 @@ export default function Skills() {
                   <h3 className="text-sm font-semibold">{g.title}</h3>
                 </div>
                 <ul className="mt-5 flex flex-wrap gap-1.5">
-                  {g.skills.map((s) => (
-                    <li key={s} className="tag transition-colors duration-300 hover:border-fg/30 hover:text-fg">
+                  {g.skills.map((s, j) => (
+                    <li key={s} className={`tag transition-colors duration-300 hover:border-fg/30 hover:text-fg ${j < 3 ? "border-fg/25 text-fg" : ""}`}>
                       {s}
                     </li>
                   ))}

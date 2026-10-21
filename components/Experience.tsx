@@ -5,9 +5,8 @@ import SectionHeader from "./SectionHeader";
 
 export default function Experience() {
   return (
-    <section id="experience" className="section">
-      <div className="section-line" aria-hidden="true" />
-      <SectionHeader label="Experience" title="Building production AI, end to end." />
+    <section id="experience" className="section band">
+      <SectionHeader index="02" label="Experience" title="Building production AI, end to end." />
 
       <div className="relative mx-auto max-w-4xl">
         {/* rail + scroll-linked glow */}

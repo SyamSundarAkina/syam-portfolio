@@ -6,9 +6,8 @@ import SectionHeader from "./SectionHeader";
 
 export default function OpenSource() {
   return (
-    <section id="open-source" className="section">
-      <div className="section-line" aria-hidden="true" />
-      <SectionHeader label="Open Source" title="Open-source contributions.">
+    <section id="open-source" className="section band">
+      <SectionHeader index="04" label="Open Source" title="Open-source contributions.">
         Fixes and improvements contributed upstream to the libraries I build with.
       </SectionHeader>
 

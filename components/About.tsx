@@ -14,8 +14,7 @@ const areaIcons: Record<AreaId, typeof Bot> = {
 export default function About() {
   return (
     <section id="about" className="section">
-      <div className="section-line" aria-hidden="true" />
-      <SectionHeader label="About" title={about.title} />
+      <SectionHeader index="01" label="About" title={about.title} />
 
       <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
         <Reveal className="card spot hud p-6 sm:p-8">

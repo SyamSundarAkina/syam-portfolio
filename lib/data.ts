@@ -29,7 +29,7 @@ export const about = {
   title: "I build AI agents, LLM apps, and ML systems for production.",
   paragraphs: [
     "I’m an AI Engineer and Data Scientist in Dallas with 4+ years of experience across machine learning, generative AI, and software engineering. I currently work at Publicis Groupe on the AI engineering side, building enterprise AI agents on Microsoft Azure and an AI-powered campaign recommendation tool.",
-    "Most of my work is in Python and SQL. I build LLM applications and multi-agent workflows with Microsoft Foundry, LangGraph, AutoGen, and CrewAI, and RAG pipelines with hybrid search, FAISS, and cross-encoder reranking. I fine-tune models with Hugging Face and PEFT/LoRA, train classical models with scikit-learn, PyTorch, and XGBoost, and contribute to open source, including Meta’s TorchRec.",
+    "Most of my work starts with a slow, high-volume manual process and ends with an agent that handles it reliably. At Publicis, that’s a multi-agent system that triages incoming email requests, recommends the next step, and drafts the reply, sending anything it isn’t sure about to a person. Before that I fine-tuned LLMs with LoRA and reworked RAG retrieval to cut recurring failures by about 20%, and I contribute upstream to open source, including Meta’s TorchRec.",
     "I care about AI that holds up after the demo: tested against real data, protected with guardrails and human review, and deployed with Docker, CI/CD, and monitoring on Azure.",
   ],
   current: {
@@ -78,7 +78,7 @@ export const experience: Role[] = [
     location: "Irving, TX",
     period: "Feb 2026 – Present",
     overview:
-      "I build enterprise AI agents and automation on Microsoft Azure. My main project is a multi-agent system that reads incoming emails and attachments, classifies each request with LLMs, and moves it to the right next step, with rules, validation, and human review built in. I also built an AI-powered campaign recommendation tool that flags campaigns needing attention and suggests budget and strategy changes.",
+      "I build enterprise AI agents and automation on Microsoft Azure. My main project is a multi-agent system that reads incoming emails and attachments, classifies each request with LLMs, and moves it to the right next step, with rules, validation, and human review built in. I also built an AI-powered campaign recommendation tool that flags campaigns needing attention and suggests budget and strategy changes. Regression testing keeps the agents at 92.6% classification accuracy with 100% manual-review compliance.",
     highlights: [
       "Built a multi-agent system on Azure for reconciliation that reads emails and attachments, classifies each request (RFIs, document requests, and others), recommends the next action, and drafts responses, orchestrated with Azure Durable Functions.",
       "Built an AI-powered campaign recommendation tool that analyzes performance data (clicks, CTR, spend), flags campaigns needing action, and suggests budget reallocation and strategy changes to media teams.",
@@ -248,35 +248,36 @@ export const openSource: Contribution[] = [
 export type SkillGroup = { id: "agents" | "rag" | "security" | "evals" | "ml" | "cloud"; title: string; skills: string[] };
 
 // Named the way 2026 AI-engineering roles describe them; every item is backed by the resumes or GitHub projects.
+// Eight per group, strongest first: the first three render highlighted as core skills.
 export const skillGroups: SkillGroup[] = [
   {
     id: "agents",
     title: "Agentic AI & Orchestration",
-    skills: ["Agentic AI", "Multi-agent orchestration", "Microsoft Foundry Agent Service", "LangGraph", "AutoGen", "CrewAI", "Gemini Agent SDK", "Tool / function calling", "Structured outputs", "Context engineering", "Human-in-the-loop workflows"],
+    skills: ["Multi-agent orchestration", "Microsoft Foundry Agent Service", "LangGraph", "AutoGen", "CrewAI", "Tool / function calling", "Structured outputs", "Human-in-the-loop workflows"],
   },
   {
     id: "rag",
     title: "LLMs, RAG & Fine-Tuning",
-    skills: ["LLM applications", "Production RAG", "Hybrid search (BM25 + vector)", "Embeddings", "FAISS", "Cross-encoder reranking", "Two-stage retrieval & ranking", "Chunking & document ingestion", "Hugging Face", "PEFT / LoRA fine-tuning", "OCR"],
+    skills: ["Production RAG", "Hybrid search (BM25 + vector)", "PEFT / LoRA fine-tuning", "FAISS", "Cross-encoder reranking", "Embeddings", "Chunking & document ingestion", "Hugging Face"],
   },
   {
     id: "security",
     title: "AI Security & Guardrails",
-    skills: ["Guardrails", "Prompt-injection defenses", "Output verification", "Schema enforcement", "Human review gates", "Azure Key Vault", "Managed Identity", "JWT / OAuth 2.0", "Azure API Management"],
+    skills: ["Guardrails", "Prompt-injection defenses", "Human review gates", "Output verification", "Schema enforcement", "Azure Key Vault", "Managed Identity", "JWT / OAuth 2.0"],
   },
   {
     id: "evals",
     title: "Evals, LLMOps & Observability",
-    skills: ["LLM evaluation", "Retrieval evaluation (hit@K, MRR)", "Ground-truth datasets", "Regression testing", "Pytest", "Grounding checks", "Benchmarking", "Prompt & model versioning", "Observability (Application Insights)", "CI/CD for AI"],
+    skills: ["LLM evaluation", "Ground-truth datasets", "Regression testing", "Retrieval evaluation (hit@K, MRR)", "Grounding checks", "Pytest", "Observability (Application Insights)", "CI/CD for AI"],
   },
   {
     id: "ml",
     title: "Machine Learning & Data Science",
-    skills: ["Python", "PyTorch", "TensorFlow", "scikit-learn", "XGBoost", "Feature engineering", "Predictive modeling", "Classification", "Recommendation & ranking", "Personalization", "A/B testing", "EDA", "Computer vision"],
+    skills: ["Python", "PyTorch", "scikit-learn", "XGBoost", "TensorFlow", "Feature engineering", "Recommendation & ranking", "A/B testing"],
   },
   {
     id: "cloud",
     title: "Cloud, APIs & Data",
-    skills: ["Azure Functions", "Durable Functions", "Event-driven workflows", "FastAPI", "Async Python (asyncio)", "REST APIs", "Webhooks", "Docker", "GitHub Actions", "SQL", "Pandas", "ETL"],
+    skills: ["Azure Functions", "FastAPI", "Docker", "Durable Functions", "GitHub Actions", "REST APIs", "SQL", "Pandas"],
   },
 ];
