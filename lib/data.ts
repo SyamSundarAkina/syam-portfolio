@@ -29,7 +29,7 @@ export const about = {
   title: "I build AI agents, LLM apps, and ML systems for production.",
   paragraphs: [
     "I’m an AI Engineer and Data Scientist in Dallas with 4+ years of experience across machine learning, generative AI, and software engineering. I currently work at Publicis Groupe on the AI engineering side, building enterprise AI agents on Microsoft Azure and an AI-powered campaign recommendation tool.",
-    "Most of my work starts with a slow, high-volume manual process and ends with an agent that handles it reliably. At Publicis, that’s a multi-agent system that triages incoming email requests, recommends the next step, and drafts the reply, sending anything it isn’t sure about to a person. Before that I fine-tuned LLMs with LoRA and reworked RAG retrieval to cut recurring failures by about 20%, and I contribute upstream to open source, including Meta’s TorchRec.",
+    "Most of my work starts with a slow, high-volume manual process and ends with an agent that handles it reliably. At Publicis, that’s a multi-agent system that triages incoming email requests, recommends the next step, and drafts the reply, sending anything it isn’t sure about to a person. Before that I fine-tuned LLMs with LoRA and reworked RAG retrieval to cut recurring failures by about 20%, and I contribute upstream to open source, with two pull requests to Meta’s TorchRec.",
     "I care about AI that holds up after the demo: tested against real data, protected with guardrails and human review, and deployed with Docker, CI/CD, and monitoring on Azure.",
   ],
   current: {
@@ -209,18 +209,24 @@ export const projects: Project[] = [
 
 /* ---------- Open source ---------- */
 
-export type Contribution = {
-  project: string;
-  repo: string; // "owner/name" on GitHub
-  context: string;
+export type PullRequest = {
   title: string; // the PR title
+  kind: "Code fix" | "Documentation";
   summary: string;
   changes: string[];
   status: "In review" | "Merged";
   pr: { number: number; url: string };
   issue?: { number: number; url: string };
   diff: string;
+};
+
+// One entry per project; its PRs are listed newest first.
+export type Contribution = {
+  project: string;
+  repo: string; // "owner/name" on GitHub
+  context: string;
   stack: string[];
+  prs: PullRequest[];
 };
 
 export const openSource: Contribution[] = [
@@ -228,18 +234,37 @@ export const openSource: Contribution[] = [
     project: "PyTorch TorchRec",
     repo: "meta-pytorch/torchrec",
     context: "Meta’s library for large-scale recommendation systems",
-    title: "Only warn about ignored cache_params when they are set",
-    summary:
-      "TorchRec logged “caching params will be ignored” for every data-parallel or dense-kernel table during embedding sharding, even when no cache settings were given, which was noisy and confusing for users.",
-    changes: [
-      "The warning now appears only when cache_params are actually set, and explains why they have no effect on fully replicated tables.",
-      "Added regression tests for both cases, with existing behavior otherwise unchanged.",
-    ],
-    status: "In review",
-    pr: { number: 4904, url: "https://github.com/meta-pytorch/torchrec/pull/4904" },
-    issue: { number: 3505, url: "https://github.com/meta-pytorch/torchrec/issues/3505" },
-    diff: "+63 −11 · 2 files",
     stack: ["Python", "PyTorch", "Distributed embeddings", "unittest"],
+    prs: [
+      {
+        title: "Fix inconsistent examples in dynamic_sharding docstring",
+        kind: "Documentation",
+        summary:
+          "The examples explaining how dynamic resharding orders the embedding shards a GPU receives contradicted themselves: each said a rank sends one table shard, then showed the receiving rank holding a different one.",
+        changes: [
+          "Corrected all three examples so received shards match the shards sent; the issue reported one mismatch, and I found two more.",
+          "Checked the docstring against the code and flagged to maintainers that it describes ordering by source rank, while the implementation sorts by column offset.",
+        ],
+        status: "In review",
+        pr: { number: 4920, url: "https://github.com/meta-pytorch/torchrec/pull/4920" },
+        issue: { number: 3395, url: "https://github.com/meta-pytorch/torchrec/issues/3395" },
+        diff: "+4 −4 · 1 file",
+      },
+      {
+        title: "Only warn about ignored cache_params when they are set",
+        kind: "Code fix",
+        summary:
+          "TorchRec logged “caching params will be ignored” for every data-parallel or dense-kernel table during embedding sharding, even when no cache settings were given, which was noisy and confusing for users.",
+        changes: [
+          "The warning now appears only when cache_params are actually set, and explains why they have no effect on fully replicated tables.",
+          "Added regression tests for both cases (assertLogs / assertNoLogs) and addressed maintainer review feedback, with existing behavior otherwise unchanged.",
+        ],
+        status: "In review",
+        pr: { number: 4904, url: "https://github.com/meta-pytorch/torchrec/pull/4904" },
+        issue: { number: 3505, url: "https://github.com/meta-pytorch/torchrec/issues/3505" },
+        diff: "+62 −11 · 2 files",
+      },
+    ],
   },
 ];
 
