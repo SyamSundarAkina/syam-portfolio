@@ -244,9 +244,9 @@ export const openSource: Contribution[] = [
         changes: [
           "Corrected every example so the shards a rank receives match the shards sent; the issue reported one mismatch, and I found two more.",
           "Checking the docs against the code, I noticed shards are sorted by column offset, not by source rank as documented. I raised it with the maintainers instead of guessing; they confirmed the code is right and the docs were outdated.",
-          "Approved and imported by a Meta maintainer.",
+          "Approved, imported, and merged by a Meta maintainer.",
         ],
-        status: "Approved",
+        status: "Merged",
         pr: { number: 4920, url: "https://github.com/meta-pytorch/torchrec/pull/4920" },
         issue: { number: 3395, url: "https://github.com/meta-pytorch/torchrec/issues/3395" },
         diff: "+4 −4 · 1 file",
