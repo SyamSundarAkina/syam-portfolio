@@ -214,7 +214,7 @@ export type PullRequest = {
   kind: "Code fix" | "Documentation";
   summary: string;
   changes: string[];
-  status: "In review" | "Merged";
+  status: "In review" | "Approved" | "Merged";
   pr: { number: number; url: string };
   issue?: { number: number; url: string };
   diff: string;
@@ -233,19 +233,20 @@ export const openSource: Contribution[] = [
   {
     project: "PyTorch TorchRec",
     repo: "meta-pytorch/torchrec",
-    context: "Meta’s library for large-scale recommendation systems",
+    context: "Meta’s open-source library for training large-scale recommendation models across many GPUs",
     stack: ["Python", "PyTorch", "Distributed embeddings", "unittest"],
     prs: [
       {
         title: "Fix inconsistent examples in dynamic_sharding docstring",
         kind: "Documentation",
         summary:
-          "The examples explaining how dynamic resharding orders the embedding shards a GPU receives contradicted themselves: each said a rank sends one table shard, then showed the receiving rank holding a different one.",
+          "The docstring explaining how GPUs order received table shards during dynamic resharding had examples that contradicted themselves. I fixed all three, two more than were reported.",
         changes: [
-          "Corrected all three examples so received shards match the shards sent; the issue reported one mismatch, and I found two more.",
-          "Checked the docstring against the code and flagged to maintainers that it describes ordering by source rank, while the implementation sorts by column offset.",
+          "Corrected every example so the shards a rank receives match the shards sent; the issue reported one mismatch, and I found two more.",
+          "Checking the docs against the code, I noticed shards are sorted by column offset, not by source rank as documented. I raised it with the maintainers instead of guessing; they confirmed the code is right and the docs were outdated.",
+          "Approved and imported by a Meta maintainer.",
         ],
-        status: "In review",
+        status: "Approved",
         pr: { number: 4920, url: "https://github.com/meta-pytorch/torchrec/pull/4920" },
         issue: { number: 3395, url: "https://github.com/meta-pytorch/torchrec/issues/3395" },
         diff: "+4 −4 · 1 file",
@@ -254,15 +255,16 @@ export const openSource: Contribution[] = [
         title: "Only warn about ignored cache_params when they are set",
         kind: "Code fix",
         summary:
-          "TorchRec logged “caching params will be ignored” for every data-parallel or dense-kernel table during embedding sharding, even when no cache settings were given, which was noisy and confusing for users.",
+          "Users saw “caching params will be ignored” for every data-parallel or dense embedding table, even with no caching configured. I traced it to add_params_from_parameter_sharding and made it fire only when cache settings are actually present.",
         changes: [
-          "The warning now appears only when cache_params are actually set, and explains why they have no effect on fully replicated tables.",
-          "Added regression tests for both cases (assertLogs / assertNoLogs) and addressed maintainer review feedback, with existing behavior otherwise unchanged.",
+          "Review round 1: the maintainer noted my message claimed dense tables are “fully replicated on each device”, which is only true for data-parallel tables, so I corrected it.",
+          "Review round 2: cache settings can arrive per table (cache_params) or globally (the sharder’s fused_params). I moved the check to the merged config to cover both, and deliberately left out prefetch options, often set globally, to keep the noise from coming back.",
+          "Wrote regression tests (assertLogs / assertNoLogs) and confirmed each one fails on the old code before the fix.",
         ],
         status: "In review",
         pr: { number: 4904, url: "https://github.com/meta-pytorch/torchrec/pull/4904" },
         issue: { number: 3505, url: "https://github.com/meta-pytorch/torchrec/issues/3505" },
-        diff: "+62 −11 · 2 files",
+        diff: "+106 −11 · 2 files",
       },
     ],
   },

@@ -9,13 +9,16 @@ export default function OpenSource() {
   return (
     <section id="open-source" className="section band">
       <SectionHeader index="04" label="Open Source" title="Open-source contributions.">
-        Fixes and improvements contributed upstream to the libraries I build with.
+        Fixes contributed upstream to a large codebase: tracing bugs, writing focused regression tests, and working through maintainer code review.
       </SectionHeader>
 
       <div className="mx-auto grid max-w-3xl grid-cols-[minmax(0,1fr)] gap-5">
         {openSource.map((c) => {
-          const open = c.prs.filter((p) => p.status === "In review").length;
-          const merged = c.prs.length - open;
+          const count = (status: string) => c.prs.filter((p) => p.status === status).length;
+          const statusSummary = (["Merged", "Approved", "In review"] as const)
+            .map((s) => count(s) && `${count(s)} ${s.toLowerCase()}`)
+            .filter(Boolean)
+            .join(" · ");
           return (
             <Reveal key={c.repo}>
               <article className="card spot hud p-6 transition-colors duration-300 hover:border-fg/20 sm:p-7">
@@ -30,7 +33,7 @@ export default function OpenSource() {
                   </a>
                   <span className="inline-flex items-center gap-1.5 rounded-full border border-line px-2.5 py-0.5 font-mono text-[11px] text-muted">
                     <GitPullRequest className="h-3.5 w-3.5" aria-hidden="true" />
-                    {c.prs.length} PRs · {[merged && `${merged} merged`, open && `${open} in review`].filter(Boolean).join(" · ")}
+                    {c.prs.length} PRs · {statusSummary}
                   </span>
                 </div>
 
